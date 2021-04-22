@@ -1,0 +1,343 @@
+<div id="main">
+<img src="hall8.jpg" id="hall1">
+<img src="hall13.jpg" id="hall2">
+<img src="hall11.jpg" id="hall3">
+<img src="left.png" id="left" ontouchstart="left()" ontouchend="clearTimeout(intervl)" ondblclick="drastleft()">
+<img src="down.png" id="down" ontouchstart="down()" ontouchend="clearTimeout(stretchinterv)">
+<img src="right.png" id="right" ontouchstart="right()" ontouchend="clearTimeout(intervr)" ondblclick="drastright()">
+<img src="upp.png" id="up" ontouchstart="up()" ontouchend="clearTimeout(stretchinterv)">
+<img src="gunbtn.png" id="chgun" onclick="chgun()">
+<img src="mgun4.png" id="gun">
+<img src="fire.png" id="shooter" ontouchstart="machinegun()" ontouchend="holdfire()">
+<img src="pro2.png" id="man">
+<div id="melife"><div id="ml"></div></div>
+<div  id="mekills"><div id="mk"></div></div>
+<img id="rld" src="reloady.png">
+<img id="grn" src="granade.png"> 
+<img id="hlth" src="hlth.png"> 
+</div>
+
+<style>
+@keyframes vibr{
+from{
+transform:rotateX(0deg);
+}
+to{
+transform:rotateX(20deg);
+}
+}
+#hlth{
+position:fixed;
+width:5%;
+height:13%;
+bottom:1%;
+left:22%;
+}
+#grn{
+position:fixed;
+width:15%;
+height:13%;
+bottom:1%;
+left:25%;
+}
+#rld{
+position:fixed;
+width:8%;
+bottom:40%;
+right:19%;
+opacity:0.5;
+}
+#mk{
+position:absolute;
+height:100%;
+width:0%;
+background-color:grey;
+border-radius:100px 0 100px 0;
+text-align:center;
+color:white;
+font-size:50%;
+}
+#ml{
+position:absolute;
+height:100%;
+width:100%;
+background-color:green;
+border-radius:0 100px 0 100px;
+text-align:center;
+color:white;
+font-size:50%;
+}
+#mekills{
+position:fixed;
+width:27%;
+height:4%;
+border:1px solid grey;
+left:15%;
+top:21%;
+border-radius:100px 0 100px 0;
+}
+#melife{
+position:fixed;
+width:27%;
+height:4%;
+border:1px solid green;
+left:15%;
+top:5%;
+border-radius:0 100px 0 100px;
+}
+#man{
+position:fixed;
+background:-webkit-radial-gradient(top,#000,#555);
+width:14%;
+height:26%;
+clip-path:circle();
+top:2%;
+left:0%;
+border:3px solid #609;
+}
+#gun{
+position:fixed;
+width:50%;
+left:25%;
+bottom:-30%;
+}
+#chgun{
+position:fixed;
+width:8%;
+top:35%;
+clip-path:circle();
+opacity:0.7;
+}
+#shooter{
+position:fixed;
+width:18%;
+clip-path:circle();
+bottom:5%;
+right:17%;
+opacity:0.4;
+}
+#up{
+position:fixed;
+width:10%;
+bottom:50%;
+right:5%;
+opacity:0.3;
+}
+#right{
+position:fixed;
+width:10%;
+bottom:20%;
+right:5%;
+opacity:0.3;
+}
+#down{
+position:fixed;
+width:10%;
+bottom:3%;
+left:10%;
+opacity:0.3;
+}
+#left{
+position:fixed;
+width:10%;
+bottom:32%;
+left:10%;
+opacity:0.3;
+}
+#hall1{
+position:fixed;
+width:100%;
+height:100%;
+top:0%;
+left:-100%;
+}
+#hall2{
+position:fixed;
+width:100%;
+height:100%;
+top:0%;
+left:0%;
+}
+#hall3{
+position:fixed;
+width:100%;
+height:100%;
+top:0%;
+left:100%;
+}
+body{
+background:black;
+}
+@keyframes smoothch{
+0%{bottom:-25%;}
+25%{bottom:-60%%;}
+50%{bottom:-150%;}
+75%{bottom:-15%;}
+100%{bottom:-17%;}
+}
+#hall1,#hall2,#hall3{
+transition:;
+}
+@media(orientation:portrait){
+#main{display:none}
+}
+</style>
+
+<script>
+'use strict';
+let hall1 = document.querySelector("#hall1").style;
+let hall2 = document.querySelector("#hall2").style;
+let hall3 = document.querySelector("#hall3").style;
+let gun = document.querySelector("#gun").style;
+let Gun = document.querySelector("#gun");
+let lb = document.querySelector("#ml").style;
+let h1 = -100;
+let h2 = 0;
+let h3 = 100;
+let istretch = 100;
+let gunlower = -30;
+let intervl;
+let intervr;
+let stretchinterv;
+let ngun = 0;
+const holdfire=()=>{
+gun.animation="";
+}
+const machinegun=()=>{
+gun.animation="vibr 0.05s linear infinite";
+}
+const animch=(src)=>{
+setTimeout(()=>{
+Gun.src=src;
+},500);
+}
+const chgun=()=>{
+gun.animation = "smoothch 1s linear";
+setTimeout(()=>{
+gun.animation="";
+},1000);
+switch(ngun){
+case 0:
+ngun+=1;
+gun.width = "40%";
+animch("mgun1.png");
+break;
+case 1:
+ngun+=1;
+gun.width = "50%";
+animch("mgun2.png");
+break;
+case 2:
+ngun+=1;
+gun.width = "50%";
+animch("mgun3.png");
+break;
+case 3:
+ngun+=1;
+gun.width = "50%";
+animch("mgun4.png");
+break;
+case 4:
+ngun+=1;
+gun.width = "50%";
+animch("mgun5.png");
+break;
+case 5:
+ngun+=1;
+gun.width = "50%";
+animch("mgun6.png");
+break;
+case 6:
+ngun = 0;
+gun.width = "50%";
+animch("mgun7.png");
+break;
+}
+}
+const down=()=>{
+stretchinterv = setTimeout(()=>{
+if(istretch>100 && gunlower===-17){
+istretch-=1;
+hall1.height = istretch+"%";
+hall2.height = istretch+"%";
+hall3.height = istretch+"%";
+}
+else if(istretch===100 && gunlower>-50){
+gunlower-=1;
+gun.bottom = gunlower+"%";
+}
+else{return}
+down();
+},0);
+}
+const up=()=>{
+stretchinterv = setTimeout(()=>{
+if(istretch<200 && gunlower===-17){
+istretch+=1;
+hall1.height = istretch+"%";
+hall2.height = istretch+"%";
+hall3.height = istretch+"%";
+}
+else if(istretch<200 && gunlower<-17){
+gunlower+=1;
+gun.bottom = gunlower+"%";
+}
+else{return}
+up();
+},0);
+}
+const drastright=()=>{
+if(h1<=50 && h1>-50){
+h1=-100;h2=0;h3=100;
+hall1.left=h1+"%";
+hall2.left=h2+"%";
+hall3.left=h3+"%";
+}
+else if(h2<=50 && h2>-30){
+h1=-200;h2=-100;h3=0;
+hall1.left=h1+"%";
+hall2.left=h2+"%";
+hall3.left=h3+"%";
+}
+else{return}
+}
+const right=()=>{
+intervr = setTimeout(()=>{
+if(h3>-40){
+h1-=0.8;h2-=0.8;h3-=0.8;
+hall1.left = h1+"%";
+hall2.left = h2+"%";
+hall3.left = h3+"%";
+}
+else{return}
+right();
+},5);
+}
+const drastleft=()=>{
+if(h3<=50 && h3>-50){
+h1=-100;h2=0;h3=100;
+hall1.left=h1+"%";
+hall2.left=h2+"%";
+hall3.left=h3+"%";
+}
+else if(h2<=50 && h2>-30){
+h1=0;h2=100;h3=200;
+hall1.left=h1+"%";
+hall2.left=h2+"%";
+hall3.left=h3+"%";
+}
+else{return}
+}
+const left=()=>{
+intervl = setTimeout(()=>{
+if(h1<50){
+h1+=0.8;h2+=0.8;h3+=0.8;
+hall1.left = h1+"%";
+hall2.left = h2+"%";
+hall3.left = h3+"%";
+}
+else{return}
+left();
+},5);
+}
+</script>
